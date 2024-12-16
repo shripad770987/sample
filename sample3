@@ -1,0 +1,29 @@
+import boto3
+
+def get_ecs_cluster_details(cluster_name, service_name):
+    # Create a boto3 client for ECS
+    ecs_client = boto3.client('ecs')
+
+    # Get cluster details
+    cluster_response = ecs_client.describe_clusters(clusters=[cluster_name])
+    if not cluster_response['clusters']:
+        print(f"No cluster found with name {cluster_name}")
+        return
+
+    cluster_details = cluster_response['clusters'][0]
+    print(f"Cluster Details: {cluster_details}")
+
+    # Get service details
+    service_response = ecs_client.describe_services(cluster=cluster_name, services=[service_name])
+    if not service_response['services']:
+        print(f"No service found with name {service_name} in cluster {cluster_name}")
+        return
+
+    service_details = service_response['services'][0]
+    desired_count = service_details['desiredCount']
+    print(f"Service '{service_name}' Desired Count: {desired_count}")
+
+if __name__ == "__main__":
+    cluster_name = 'default'
+    service_name = 'ECS_Runner'
+    get_ecs_cluster_details(cluster_name, service_name)
