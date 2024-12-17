@@ -1,29 +1,47 @@
 import boto3
+import time
 
-def get_ecs_cluster_details(cluster_name, service_name):
-    # Create a boto3 client for ECS
-    ecs_client = boto3.client('ecs')
+def update_service_desired_count(cluster_name, service_name, new_desired_count, region_name):
+    # Create a boto3 client for ECS with the specified region
+    ecs_client = boto3.client('ecs', region_name=region_name)
 
-    # Get cluster details
-    cluster_response = ecs_client.describe_clusters(clusters=[cluster_name])
-    if not cluster_response['clusters']:
-        print(f"No cluster found with name {cluster_name}")
-        return
+    # Update the desired count for the service
+    response = ecs_client.update_service(
+        cluster=cluster_name,
+        service=service_name,
+        desiredCount=new_desired_count
+    )
 
-    cluster_details = cluster_response['clusters'][0]
-    print(f"Cluster Details: {cluster_details}")
+    print(f"Updated service '{service_name}' in cluster '{cluster_name}' to desired count: {new_desired_count}")
+    print(f"Response: {response}")
 
-    # Get service details
-    service_response = ecs_client.describe_services(cluster=cluster_name, services=[service_name])
-    if not service_response['services']:
-        print(f"No service found with name {service_name} in cluster {cluster_name}")
-        return
+    # Wait for the service to stabilize
+    waiter = ecs_client.get_waiter('services_stable')
+    try:
+        waiter.wait(
+            cluster=cluster_name,
+            services=[service_name],
+            WaiterConfig={
+                'Delay': 15,
+                'MaxAttempts': 40
+            }
+        )
+        print(f"Service '{service_name}' has stabilized.")
+    except Exception as e:
+        print(f"Error waiting for service to stabilize: {e}")
 
-    service_details = service_response['services'][0]
-    desired_count = service_details['desiredCount']
-    print(f"Service '{service_name}' Desired Count: {desired_count}")
+    # Describe the service to check the running count
+    service_response = ecs_client.describe_services(
+        cluster=cluster_name,
+        services=[service_name]
+    )
+    running_count = service_response['services'][0]['runningCount']
+    print(f"Service '{service_name}' running count: {running_count}")
 
 if __name__ == "__main__":
-    cluster_name = 'your-cluster-name'
-    service_name = 'your-service-name'
-    get_ecs_cluster_details(cluster_name, service_name)
+    cluster_name = 'default'
+    service_name = 'ECS_Runner'
+    new_desired_count = 10  # Set the desired count to the new value you want
+    region_name = 'us-west-2'  # Set the AWS region you want to use
+
+    update_service_desired_count(cluster_name, service_name, new_desired_count, region_name)
