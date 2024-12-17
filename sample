@@ -1,3 +1,4 @@
-1) create python script to get details of ecs cluster,  desried service count for mentioned service.
-2) add 5 to desired count
-3) create python script to upate desiredcount for that service
+Updated service 'ECS_Runner' in cluster 'default' to desired count: 10
+Response: {'service': {'serviceArn': 'arn:aws:ecs:us-east-1:739275441922:service/default/ECS_Runner', 'serviceName': 'ECS_Runner', 'clusterArn': 'arn:aws:ecs:us-east-1:739275441922:cluster/default', 'loadBalancers': [], 'serviceRegistries': [], 'status': 'ACTIVE', 'desiredCount': 10, 'runningCount': 1, 'pendingCount': 0, 'launchType': 'EC2', 'taskDefinition': 'arn:aws:ecs:us-east-1:739275441922:task-definition/POC-PT-Runner-API-A:6', 'deploymentConfiguration': {'deploymentCircuitBreaker': {'enable': True, 'rollback': True}, 'maximumPercent': 200, 'minimumHealthyPercent': 100, 'alarms': {'alarmNames': [], 'rollback': False, 'enable': False}}, 'deployments': [{'id': 'ecs-svc/7046731507285468417', 'status': 'PRIMARY', 'taskDefinition': 'arn:aws:ecs:us-east-1:739275441922:task-definition/POC-PT-Runner-API-A:6', 'desiredCount': 10, 'pendingCount': 0, 'runningCount': 1, 'failedTasks': 0, 'createdAt': datetime.datetime(2024, 12, 16, 11, 37, 58, 722000, tzinfo=tzlocal()), 'updatedAt': datetime.datetime(2024, 12, 17, 
+Error waiting for service to stabilize: Waiter ServicesStable failed: Max attempts exceeded
+Service 'ECS_Runner' running count: 1
