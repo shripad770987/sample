@@ -1,22 +1,3 @@
-import boto3
-
-def update_service_desired_count(cluster_name, service_name, new_desired_count):
-    # Create a boto3 client for ECS
-    ecs_client = boto3.client('ecs')
-
-    # Update the desired count for the service
-    response = ecs_client.update_service(
-        cluster=cluster_name,
-        service=service_name,
-        desiredCount=new_desired_count
-    )
-
-    print(f"Updated service '{service_name}' in cluster '{cluster_name}' to desired count: {new_desired_count}")
-    print(f"Response: {response}")
-
-if __name__ == "__main__":
-    cluster_name = 'default'
-    service_name = 'ECS_Runner'
-    new_desired_count = 10  # Set the desired count to the new value you want
-
-    update_service_desired_count(cluster_name, service_name, new_desired_count)
+    raise error_class(parsed_response, operation_name)
+botocore.errorfactory.AccessDeniedException: An error occurred (AccessDeniedException) when calling the UpdateService operation: User: arn:aws:sts::739275441922:assumed-role/ecsTaskExecutionRole1/82138b6ae0264b0ab6c0702f1a894c10 is not authorized to perform: ecs:UpdateService on resource: arn:aws:ecs:us-east-1:739275441922:service/default/ECS_Runner because no identity-based policy allows the ecs:UpdateService action
+Error: Process completed with exit code 1.
