@@ -1,3 +1,14 @@
-    raise error_class(parsed_response, operation_name)
-botocore.errorfactory.AccessDeniedException: An error occurred (AccessDeniedException) when calling the UpdateService operation: User: arn:aws:sts::739275441922:assumed-role/ecsTaskExecutionRole1/82138b6ae0264b0ab6c0702f1a894c10 is not authorized to perform: ecs:UpdateService on resource: arn:aws:ecs:us-east-1:739275441922:service/default/ECS_Runner because no identity-based policy allows the ecs:UpdateService action
-Error: Process completed with exit code 1.
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecs:UpdateService"
+            ],
+            "Resource": [
+                "arn:aws:ecs:us-east-1:739275441922:service/default/ECS_Runner"
+            ]
+        }
+    ]
+}
