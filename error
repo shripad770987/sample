@@ -1,0 +1,2 @@
+Task stopped at: 2024-12-18T11:20:15.898Z
+CannotPullContainerError: pull image manifest has been retried 5 time(s): failed to resolve ref docker.io/ashutoshmishra2024/jmeter-pt-image:latest: failed to do request: Head "https://registry-1.docker.io/v2/ashutoshmishra2024/jmeter-pt-image/manifests/latest": dial tcp 54.236.113.205:443: i/o timeout
