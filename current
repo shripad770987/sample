@@ -1,1 +1,1 @@
-"family": "POC-PT-Runner-API-A",
+service ECS_Runner was unable to place a task because no container instance met all of its requirements. The closest matching container-instance 85e0b41a00324eb0b79691eb7e336215 has insufficient CPU units available. For more information, see the Troubleshooting section of the Amazon ECS Developer Guide.
