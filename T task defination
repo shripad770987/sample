@@ -1,0 +1,262 @@
+{
+
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:367379483300:task-definition/a209045-idt-osqa-github-runner-api-us-east-1-qa:4",
+
+    "containerDefinitions": [
+
+        {
+
+            "name": "a209045-idt-osqa-github-runner-api-us-east-1-qa",
+
+            "image": "108750161421.dkr.ecr.us-east-1.amazonaws.com/a209045/osqa-githubrunner-api:19a07c39294bd3890e76f2e698ce75bc8357521a",
+
+            "cpu": 1000,
+
+            "memory": 2000,
+
+            "links": [],
+
+            "portMappings": [],
+
+            "essential": true,
+
+            "entryPoint": [],
+
+            "command": [],
+
+            "environment": [],
+
+            "environmentFiles": [],
+
+            "mountPoints": [],
+
+            "volumesFrom": [],
+
+            "secrets": [
+
+                {
+
+                    "name": "IDT_GITHUB_TOKEN",
+
+                    "valueFrom": "arn:aws:secretsmanager:us-east-1:367379483300:secret:a209045-idt-github-runner-token-test:githubPat::"
+
+                },
+
+                {
+
+                    "name": "IDT_GITHUB_USER",
+
+                    "valueFrom": "arn:aws:secretsmanager:us-east-1:367379483300:secret:a209045-idt-github-runner-token-test:username::"
+
+                }
+
+            ],
+
+            "stopTimeout": 30,
+
+            "dnsServers": [],
+
+            "dnsSearchDomains": [],
+
+            "extraHosts": [],
+
+            "dockerSecurityOptions": [],
+
+            "dockerLabels": {},
+
+            "ulimits": [],
+
+            "logConfiguration": {
+
+                "logDriver": "awslogs",
+
+                "options": {
+
+                    "awslogs-group": "a209045-gitrunner-us-east-1-qa-ecs-ft-api",
+
+                    "awslogs-region": "us-east-1",
+
+                    "awslogs-stream-prefix": "ecs"
+
+                },
+
+                "secretOptions": []
+
+            },
+
+            "systemControls": [],
+
+            "credentialSpecs": []
+
+        }
+
+    ],
+
+    "family": "a209045-idt-osqa-github-runner-api-us-east-1-qa",
+
+    "taskRoleArn": "arn:aws:iam::367379483300:role/209045-osqa-github-runner-us-east-1-qa-ecs-tasks-role",
+
+    "executionRoleArn": "arn:aws:iam::367379483300:role/209045-osqa-github-runner-us-east-1-qa-ecs-taskexec-role",
+
+    "networkMode": "awsvpc",
+
+    "revision": 4,
+
+    "volumes": [],
+
+    "status": "ACTIVE",
+
+    "requiresAttributes": [
+
+        {
+
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+
+        },
+
+        {
+
+            "name": "ecs.capability.execution-role-awslogs"
+
+        },
+
+        {
+
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+
+        },
+
+        {
+
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+
+        },
+
+        {
+
+            "name": "ecs.capability.secrets.asm.environment-variables"
+
+        },
+
+        {
+
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
+
+        },
+
+        {
+
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+
+        },
+
+        {
+
+            "name": "ecs.capability.container-ordering"
+
+        },
+
+        {
+
+            "name": "ecs.capability.execution-role-ecr-pull"
+
+        },
+
+        {
+
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+
+        },
+
+        {
+
+            "name": "ecs.capability.task-eni"
+
+        }
+
+    ],
+
+    "placementConstraints": [],
+
+    "compatibilities": [
+
+        "EC2"
+
+    ],
+
+    "registeredAt": "2024-12-11T18:55:32.780Z",
+
+    "registeredBy": "arn:aws:sts::367379483300:assumed-role/a209045-idt-osqa-us-east-1-deploy-role-a-DeployRole-ONXsjCjTLP6M/AWSCloudFormation",
+
+    "enableFaultInjection": false,
+
+    "tags": [
+
+        {
+
+            "key": "tr:resource-owner",
+
+            "value": "IDTAWSResourceOwners@thomson.com"
+
+        },
+
+        {
+
+            "key": "tr:financial-identifier",
+
+            "value": "450200195"
+
+        },
+
+        {
+
+            "key": "tr:project-name",
+
+            "value": "idt"
+
+        },
+
+        {
+
+            "key": "tr:application-asset-insight-id",
+
+            "value": "209045"
+
+        },
+
+        {
+
+            "key": "tr:sub-service-name",
+
+            "value": "github-runner-api"
+
+        },
+
+        {
+
+            "key": "tr:service-name",
+
+            "value": "osqa"
+
+        },
+
+        {
+
+            "key": "EnvTag",
+
+            "value": "QA"
+
+        },
+
+        {
+
+            "key": "tr-image-tag",
+
+            "value": "19a07c39294bd3890e76f2e698ce75bc8357521a"
+
+        }
+
+    ]
+
+}
+ 
