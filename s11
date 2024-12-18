@@ -1,0 +1,103 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:739275441922:task-definition/POC-PT-Runner-API-A:6",
+    "containerDefinitions": [
+        {
+            "name": "jmeter-pt-image",
+            "image": "ashutoshmishra2024/jmeter-pt-image:latest",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "jmeter-pt-image-80-tcp",
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "GH_LABEL",
+                    "value": "ecsrunner"
+                },
+                {
+                    "name": "GH_REPOSITORY",
+                    "value": "PT-workflow"
+                },
+                {
+                    "name": "GH_TOKEN",
+                    
+                },
+                {
+                    "name": "GH_OWNER",
+                    "value": "shripad770987"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/POC-PT-Runner-API-A",
+                    "mode": "non-blocking",
+                    "awslogs-create-group": "true",
+                    "max-buffer-size": "25m",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            },
+            "systemControls": []
+        }
+    ],
+    "family": "POC-PT-Runner-API-A",
+    "taskRoleArn": "arn:aws:iam::739275441922:role/ecsTaskExecutionRole1",
+    "executionRoleArn": "arn:aws:iam::739275441922:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 6,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "EC2"
+    ],
+    "cpu": "1024",
+    "memory": "3072",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2024-12-16T11:34:41.399Z",
+    "registeredBy": "arn:aws:sts::739275441922:assumed-role/cloudboost_account_operator/2302372@cognizant.com",
+    "enableFaultInjection": false,
+    "tags": []
+}
