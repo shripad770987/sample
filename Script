@@ -1,0 +1,55 @@
+import boto3
+import time
+
+# Replace these with your ECS cluster and runner details
+ECS_CLUSTER_NAME = 'your-ecs-cluster'
+SAT_RUNNER_NAME = 'sat-runner'
+QA_RUNNER_NAME = 'qa-runner'
+WORKFLOW_TAG_SAT = 'SAT'
+WORKFLOW_TAG_QA = 'QA'
+
+ecs_client = boto3.client('ecs')
+runner_usage = {SAT_RUNNER_NAME: False, QA_RUNNER_NAME: False}
+
+def get_runner_status(runner_name):
+    """Check if the ECS runner is currently active."""
+    try:
+        response = ecs_client.describe_tasks(
+            cluster=ECS_CLUSTER_NAME,
+            tasks=[runner_name]
+        )
+        tasks = response.get('tasks', [])
+        return any(task['lastStatus'] == 'RUNNING' for task in tasks)
+    except Exception as e:
+        print(f"Error fetching status for runner {runner_name}: {e}")
+        return False
+
+def trigger_workflow(env, runner_name):
+    """Trigger workflows for the given environment on the specified runner."""
+    print(f"Triggering {env} workflow on {runner_name}")
+    # Simulate workflow execution (replace with your actual triggering logic)
+    time.sleep(2)
+    print(f"{env} workflow completed on {runner_name}")
+
+def manage_runners():
+    """Manage ECS runners and workflows based on usage."""
+    global runner_usage
+    # Check runner statuses
+    runner_usage[SAT_RUNNER_NAME] = get_runner_status(SAT_RUNNER_NAME)
+    runner_usage[QA_RUNNER_NAME] = get_runner_status(QA_RUNNER_NAME)
+
+    if not runner_usage[SAT_RUNNER_NAME]:
+        # Trigger SAT workflows on SAT runner
+        trigger_workflow(WORKFLOW_TAG_SAT, SAT_RUNNER_NAME)
+        runner_usage[SAT_RUNNER_NAME] = True
+
+    if not runner_usage[QA_RUNNER_NAME]:
+        # Trigger QA workflows on QA runner
+        trigger_workflow(WORKFLOW_TAG_QA, QA_RUNNER_NAME)
+        runner_usage[QA_RUNNER_NAME] = True
+
+if __name__ == '__main__':
+    while True:
+        manage_runners()
+        # Sleep to avoid continuous polling
+        time.sleep(10)
